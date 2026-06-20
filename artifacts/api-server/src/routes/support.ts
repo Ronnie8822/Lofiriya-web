@@ -1,4 +1,5 @@
 import { Router, type IRouter, type Request, type Response } from "express";
+import { config } from "../config";
 
 const router: IRouter = Router();
 
@@ -20,8 +21,8 @@ function isRateLimited(ip: string): boolean {
 }
 
 async function sendWebhook(payload: object): Promise<void> {
-  const url = process.env["DISCORD_WEBHOOK_URL"];
-  if (!url) throw new Error("DISCORD_WEBHOOK_URL not configured");
+  const url = config.supportWebhookUrl;
+  if (!url) throw new Error("SUPPORT_WEBHOOK_URL is not configured — set it to a Discord webhook URL to enable the support form.");
   const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
