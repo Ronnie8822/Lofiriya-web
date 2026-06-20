@@ -5,10 +5,12 @@ import authRouter      from "./auth";
 import guildRouter     from "./guild";
 import playlistsRouter from "./playlists";
 import activityRouter  from "./activity";
+import statusRouter    from "./status";
 
 const router: IRouter = Router();
 
 router.use(healthRouter);
+router.use(statusRouter);
 router.use(supportRouter);
 router.use(authRouter);
 router.use(guildRouter);
