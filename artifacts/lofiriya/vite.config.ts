@@ -26,6 +26,11 @@ if (!basePath) {
   );
 }
 
+// The API server runs on this port locally. All /api/* requests from the
+// browser are forwarded here by Vite's dev-server proxy, so the browser
+// always sees a single origin and cookies are set correctly.
+const API_PORT = process.env.API_PORT ? Number(process.env.API_PORT) : 3001;
+
 export default defineConfig({
   base: basePath,
   plugins: [
@@ -63,6 +68,17 @@ export default defineConfig({
     strictPort: true,
     host: "0.0.0.0",
     allowedHosts: true,
+    proxy: {
+      // Forward all /api/* requests to the Express backend.
+      // xfwd: true propagates X-Forwarded-* headers (including X-Forwarded-Proto)
+      // so that Express (with trust proxy = 1) knows the connection is HTTPS and
+      // sets secure=true on session cookies correctly.
+      "/api": {
+        target: `http://localhost:${API_PORT}`,
+        changeOrigin: false,
+        xfwd: true,
+      },
+    },
     fs: {
       strict: true,
     },
