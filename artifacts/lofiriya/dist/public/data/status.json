@@ -1,0 +1,13 @@
+{
+  "overall": "operational",
+  "services": [
+    {"name": "Bot", "status": "operational", "uptime": 99.9, "responseTime": 45},
+    {"name": "Lavalink Nodes", "status": "operational", "uptime": 99.7, "responseTime": 12},
+    {"name": "Database", "status": "operational", "uptime": 99.95, "responseTime": 8},
+    {"name": "Website", "status": "operational", "uptime": 100, "responseTime": 120},
+    {"name": "API", "status": "degraded", "uptime": 98.2, "responseTime": 340}
+  ],
+  "incidents": [
+    {"id": 1, "title": "Lavalink Node Restart", "status": "resolved", "date": "2025-06-14", "description": "Brief interruption to audio streaming. Resolved in 12 minutes."}
+  ]
+}
